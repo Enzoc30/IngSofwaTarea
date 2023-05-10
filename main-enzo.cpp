@@ -6,6 +6,7 @@
 
 using namespace std;
 
+/*
 struct Product{
     string nombre;
     double precio;
@@ -147,7 +148,7 @@ public:
     }
 
 };
-/*
+
 int main2() {
 
     Tienda store ;
