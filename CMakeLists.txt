@@ -4,5 +4,4 @@ project(IngSofwaTarea)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(IngSofwaTarea
-        main-enzo.cpp
         main.cpp)

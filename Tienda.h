@@ -13,13 +13,16 @@
 #include <sstream>
 
 #include "Product.h"
+#include "Boleta.h"
+#include "Compra.h"
+#include "Factura.h"
 #include "Usuario.h"
 using namespace std;
 
 
 class Tienda{
 private:
-    string filename= "../tienda.csv";
+    string filename= "C:\\Users\\hola\\CLionProjects\\TareaIngsS\\IngSofwaTarea\\tienda.csv";
     vector<Product> productos;
     User active_user;
 
@@ -186,8 +189,64 @@ public:
         }
         it->stock -= cantidad;
         active_user.saldo -= cantidad*to_buy.precio;
+        TipoCompras(to_buy.precio);
     }
 
+    void TipoCompras(double monto) {
+        cout << "Compra en proceso ..." << endl;
+        int opcion = 0;
+        string fecha, proveedor = "FARMACIA NEZMO";
+        string numeroBoleta, tipoPago, nombrePersona;
+        string numeroFactura, tipoFactura;
+        cout << "=== Menú ===" << endl;
+        cout << "[1] Registrar Compra" << endl;
+        cout << "[2] Registrar Boleta" << endl;
+        cout << "[3] Registrar Factura" << endl;
+        cout << "Ingrese una opcion: ";
+        cin >> opcion;
+
+        time_t tiempoActual = time(nullptr);
+        tm* fechaHora = localtime(&tiempoActual);
+        char fecha1[11];
+        strftime(fecha1, sizeof(fecha1), "%d/%m/%Y", fechaHora);
+        fecha = fecha1;
+
+        if (opcion == 1) {
+            cout << "=== Registro de Compra ===" << endl;
+            auto *compra = new Compra(1, monto, fecha, proveedor);
+            cout << " ============== COMPRA ==============" << endl;
+            compra->mostrarDatos();
+            cout << " =====================================" << endl;
+        }
+        else if (opcion == 2) {
+            cout << "=== Registro de Boleta ===" << endl;
+            cout << "Ingrese el número de boleta: ";
+            cin >> numeroBoleta;
+            cout << "Ingrese el tipo Pago: ";
+            cin >> tipoPago;
+            cout << "Ingrese su nombre : ";
+            cin >> nombrePersona;
+            Compra *boleta = new Boleta(1, monto, fecha, proveedor, nombrePersona, numeroBoleta, tipoPago);
+            boleta->mostrarDatos();
+        }else if (opcion == 3) {
+            cout << "=== Registro de Factura ===" << endl;
+            cout << "Ingrese el número de Factura: ";
+            cin >> numeroBoleta;
+            cout << "Ingrese el nombre de la empresa: ";
+            cin >> nombrePersona;
+            cout << "Ingrese el tipo de Factura";
+            cin >> tipoPago;
+            Compra *factura = new Factura(1, monto, fecha, proveedor, nombrePersona, numeroBoleta, tipoPago);
+            factura->mostrarDatos();
+        }else{
+            cout << "=== Registro de Compra ==="<< endl;
+            auto *compra1 = new Compra(1, monto, fecha, proveedor);
+            cout << " ============== COMPRA ==============" << endl;
+            compra1->mostrarDatos();
+            cout << " =====================================" << endl;
+        }
+
+    }
     void print(){
         cout << "******************** LISTA ********************" << endl;
         cout << "\tPRODUCTO\t\tPRECIO\tSTOCK" << endl;

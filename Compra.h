@@ -11,14 +11,23 @@ using namespace std;
 
 class Compra {
     int id;
-    float total;
+    string fecha;
+    double monto;
+    string proveedor;
 
 public:
-    Compra(int _id, float _total) : id(_id), total(_total) {}
+    Compra(int _id, double _total, string _fecha, string _proveedor ) {
+        id = _id;
+        monto = _total ;
+        fecha = _fecha;
+        proveedor = _proveedor;
+    }
 
-    virtual void mostrarDetalles() {
-        cout << "ID de compra: " << id << endl;
-        cout << "Total: $" << total << endl;
+    virtual void mostrarDatos() {
+        cout << "\tID de compra: " << id << endl;
+        cout << "\tFecha: " << fecha << endl;
+        cout << "\tProveedor: " << proveedor << endl;
+        cout << "\tTotal: $" << monto << endl;
     }
 };
 
