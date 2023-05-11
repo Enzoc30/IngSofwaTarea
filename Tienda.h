@@ -13,13 +13,15 @@
 #include <sstream>
 
 #include "Product.h"
+#include "Usuario.h"
 using namespace std;
 
 
 class Tienda{
 private:
-    string filename= "C:\\Users\\hola\\CLionProjects\\TareaIngsS\\IngSofwaTarea\\tienda.csv";
+    string filename= "../tienda.csv";
     vector<Product> productos;
+    User active_user;
 
 public:
     Tienda() {
@@ -41,6 +43,63 @@ public:
             archivo.close();
 
         }
+    }
+
+    void logIn(){
+        string credentials;
+        string dni;
+        string nombre;
+        double saldo;
+        cout << "Ingrese su DNI para ingresar. En caso no tenga cuenta, escriba 0 para registrarse." << endl;
+        cin >> credentials;
+
+        if (credentials == "0"){
+            signUp();
+            return;
+        }
+
+        ifstream archivo("../users.csv");
+        if (archivo.is_open()) {
+            string linea;
+            while (getline(archivo, linea)) {
+                stringstream ss(linea);
+                getline(ss, dni, ',');
+                if (dni == credentials){
+                    getline(ss, nombre, ',');
+                    ss >> saldo;
+                    ss.ignore();
+                    active_user = User(dni, nombre, saldo);
+                    archivo.close();
+                    return;
+                }
+            }
+        }
+
+        cout << "User no encontrado." << endl;
+        logIn();
+    }
+
+    void signUp(){
+        string dni;
+        string nombre;
+        double saldo;
+        cout << "Puede proceder a registrarse." << endl;
+        cout << "DNI: ";
+        cin >> dni;
+        cout << "Nombre: ";
+        cin >> nombre;
+        cout << "Saldo a depositar: ";
+        cin >> saldo;
+        active_user = User(dni,nombre,saldo);
+
+        ofstream user("../users.csv", ios::app);
+        user<<active_user.dni;
+        user<<",";
+        user<<active_user.nombre;
+        user<<",";
+        user<<active_user.saldo;
+        user<<endl;
+        user.close();
     }
 
     void add(){
@@ -95,6 +154,7 @@ public:
 
     void comprar (){
         vector<Product>::iterator it;
+        Product to_buy;
         cout << "******************** LISTA ********************" << endl;
         cout << "\tPRODUCTO\t\tPRECIO" << endl;
         for(auto &i : productos){
@@ -105,6 +165,7 @@ public:
             cout <<  "Nombre del producto que quiere comprar:" ;
             cin >> name;
             it = find_if(productos.begin(), productos.end(), [&](Product &p) {
+                to_buy = p;
                 return p.nombre == name;
             });
         } while (it == productos.end() ||  it->stock == 0);
@@ -118,11 +179,13 @@ public:
             cout << "Ingrese la cantidad a comprar: ";
             cin >> cantidad; cout << endl;
         }
+        while (cantidad*to_buy.precio > active_user.saldo){
+            cout << "Usted cuenta con " << active_user.saldo << " soles, pero su compra es de " << cantidad*to_buy.precio << "." << endl;
+            cout << "Ingrese la cantidad a comprar: ";
+            cin >> cantidad; cout << endl;
+        }
         it->stock -= cantidad;
-
-
-
-
+        active_user.saldo -= cantidad*to_buy.precio;
     }
 
     void print(){
@@ -146,6 +209,26 @@ public:
             escribir<<endl;
         }
         escribir.close();
+
+        fstream user("../users.csv",ios::in | ios::out);
+        if (user.is_open()) {
+            string linea;
+            string dni;
+            long int pos;
+            while (getline(user, linea)) {
+                pos = user.tellg();
+                stringstream ss(linea);
+                getline(ss, dni, ',');
+                if (dni == active_user.dni){
+                    user.seekp(pos);
+                    user<<active_user.dni << ",";
+                    user<<active_user.nombre << ",";
+                    user<<active_user.saldo << endl;
+                    user.close();
+                    break;
+                }
+            }
+        }
     }
 
 };

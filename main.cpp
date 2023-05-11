@@ -8,6 +8,9 @@ int main() {
     Tienda store ;
     int opcion;
     cout << "[--- BIENVENIDOS A FARMACIA NEZMO ---]" << endl;
+
+    store.logIn();
+
     do {
         cout << "---------------- Menu ----------------" << endl;
         cout << "\t[1] Mostrar productos" << endl;
