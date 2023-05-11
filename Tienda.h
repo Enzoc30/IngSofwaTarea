@@ -13,6 +13,7 @@
 #include <sstream>
 
 #include "Product.h"
+#include "Compra.h"
 using namespace std;
 
 
@@ -120,8 +121,7 @@ public:
         }
         it->stock -= cantidad;
 
-
-
+        
 
     }
 

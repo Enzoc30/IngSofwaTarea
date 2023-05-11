@@ -12,6 +12,8 @@ using namespace std;
 class Boleta : public Compra{
 private:
     string nombreCliente;
+    string numeroBoleta;
+    string tipoPago;
 public:
     Boleta(int _id, float _total, string _nombreCliente) : Compra(_id, _total), nombreCliente(_nombreCliente) {}
 

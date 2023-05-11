@@ -12,13 +12,19 @@ using namespace std;
 class Factura : public Compra{
 private:
     string nombreProveedor;
+    string tipoFactura;
+    string numeroFactura;
 
 public:
     Factura(int _id, float _total, string _nombreProveedor) : Compra(_id, _total), nombreProveedor(_nombreProveedor) {}
     void mostrarDetalles() {
-        cout << "Factura" << endl;
+        cout << " ============== Factura ==============" << endl;
         Compra::mostrarDetalles();
-        cout << "Nombre del proveedor: " << nombreProveedor << endl;
+        cout << "\tNumero de Factura:    " << nombreProveedor << endl;
+        cout << "\tNombre del proveedor:    " << nombreProveedor << endl;
+        cout << "\tTipo de Factura:    " << nombreProveedor << endl;
+        cout << " =====================================" << endl;
+
     }
 };
 
