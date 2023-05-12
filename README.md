@@ -2,9 +2,10 @@
 
 # **Integrantes**:
 
-  * ## Enzo Camizan Vidal 
-  * ## Paolo Vásquez 
-  * ## Valeria Espinoza 
-  * ## Valentín Quezada 
-  * ## Sofía García 
+  * ## Enzo Camizan Vidal - 202110047
+  * ## Paolo Vásquez - 202110379
+  * ## Valeria Espinoza -  202110109
+  * ## Valentín Quezada  - 202120750
+  * ## Sofía García  - 202110567
 
+![Diagrama UML](DiagramaDeClases.jpeg)
