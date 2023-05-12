@@ -8,3 +8,4 @@
   * ## Valentín Quezada  - 202120750
   * ## Sofía García  - 202110567
 
+![Diagrama UML](DiagramaDeClases.jpeg)
