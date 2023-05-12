@@ -12,6 +12,7 @@ int main() {
     store.logIn();
 
     do {
+        store.showCredentials();
         cout << "---------------- Menu ----------------" << endl;
         cout << "\t[1] Mostrar productos" << endl;
         cout << "\t[2] Actualizar stock" << endl;

@@ -22,7 +22,7 @@ using namespace std;
 
 class Tienda{
 private:
-    string filename= "C:\\Users\\hola\\CLionProjects\\TareaIngsS\\IngSofwaTarea\\tienda.csv";
+    string filename= "../tienda.csv";
     vector<Product> productos;
     User active_user;
 
@@ -94,15 +94,12 @@ public:
         cout << "Saldo a depositar: ";
         cin >> saldo;
         active_user = User(dni,nombre,saldo);
+    }
 
-        ofstream user("../users.csv", ios::app);
-        user<<active_user.dni;
-        user<<",";
-        user<<active_user.nombre;
-        user<<",";
-        user<<active_user.saldo;
-        user<<endl;
-        user.close();
+    void showCredentials(){
+        cout << endl;
+        cout << "BIENVENID@ " << active_user.nombre << endl;
+        cout << "SALDO: " << active_user.saldo << endl;
     }
 
     void add(){
@@ -175,17 +172,27 @@ public:
 
         cout << "Stock actual del producto " << it->nombre << ": " << it->stock << endl;
         int cantidad = 0;
-        cout << "Ingrese la cantidad a comprar:";
+        cout << "Ingrese la cantidad a comprar. En caso desee salir, escriba 0: ";
         cin >> cantidad; cout << endl;
+        if (cantidad == 0){
+            return;
+        }
+
         while (cantidad < 0 || it->stock - cantidad < 0) {
             cout << "La cantidad ingresada no esta disponible." << endl;
-            cout << "Ingrese la cantidad a comprar: ";
+            cout << "Ingrese la cantidad a comprar. En caso desee salir, escriba 0: ";
             cin >> cantidad; cout << endl;
+            if (cantidad == 0){
+                return;
+            }
         }
         while (cantidad*to_buy.precio > active_user.saldo){
             cout << "Usted cuenta con " << active_user.saldo << " soles, pero su compra es de " << cantidad*to_buy.precio << "." << endl;
-            cout << "Ingrese la cantidad a comprar: ";
+            cout << "Ingrese la cantidad a comprar. En caso desee salir, escriba 0: ";
             cin >> cantidad; cout << endl;
+            if (cantidad == 0){
+                return;
+            }
         }
         it->stock -= cantidad;
         active_user.saldo -= cantidad*to_buy.precio;
@@ -257,37 +264,45 @@ public:
         cout << endl;
     }
 
-    ~Tienda(){
-        ofstream escribir(filename);
-        for(auto &i : productos){
-            escribir<<i.nombre;
-            escribir<<",";
-            escribir<<i.precio;
-            escribir<<",";
-            escribir<<i.stock;
-            escribir<<endl;
-        }
-        escribir.close();
 
-        fstream user("../users.csv",ios::in | ios::out);
-        if (user.is_open()) {
-            string linea;
-            string dni;
-            long int pos;
-            while (getline(user, linea)) {
-                pos = user.tellg();
+    ~Tienda(){
+        ofstream file(filename);
+        for(auto &i : productos){
+            file<<i.nombre<<",";
+            file<<i.precio<<",";
+            file<<i.stock<<endl;
+        }
+        file.close();
+
+        bool new_user = true;
+        long long pos;
+        ifstream get_user("../users.csv", ios::in | ios::out);
+        if (get_user.is_open()) {
+            string linea, dni;
+            while (getline(get_user, linea)) {
                 stringstream ss(linea);
                 getline(ss, dni, ',');
                 if (dni == active_user.dni){
-                    user.seekp(pos);
-                    user<<active_user.dni << ",";
-                    user<<active_user.nombre << ",";
-                    user<<active_user.saldo << endl;
-                    user.close();
+                    new_user = false;
                     break;
                 }
+                pos = get_user.tellg();
             }
+            get_user.close();
         }
+
+
+        ofstream write_user("../users.csv", ios::in | ios::out);
+        if (!new_user){
+            write_user.seekp(pos, ios::beg);
+        }
+        else{
+            write_user.seekp(0, ios::end);
+        }
+        write_user<<active_user.dni << ",";
+        write_user<<active_user.nombre << ",";
+        write_user<<active_user.saldo << endl;
+        write_user.close();
     }
 
 };
