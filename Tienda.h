@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <ctime>
 
 #include "Product.h"
 #include "Boleta.h"
@@ -24,9 +25,9 @@ class Tienda{
 private:
     string filename= "../tienda.csv";
     vector<Product> productos;
-    User active_user;
 
 public:
+    User active_user;
     Tienda() {
         ifstream archivo(filename);
         if (archivo.is_open()) {

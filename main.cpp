@@ -1,9 +1,9 @@
 #include <iostream>
+#include "testing.cpp"
 #include "Tienda.h"
 using namespace std;
 
-
-int main() {
+int run() {
 
     Tienda store ;
     int opcion;
@@ -43,5 +43,10 @@ int main() {
         }
     } while (opcion != 5);
 
+    return 0;
+}
+
+int main(){
+    signUp_sadtest();
     return 0;
 }
