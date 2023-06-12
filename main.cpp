@@ -60,6 +60,7 @@ int tests(){
     comprar_unhappytest();
     nocomprar_happytest();
     nocomprar_unhappytest();
+    return 0;
 }
 
 int main(){
