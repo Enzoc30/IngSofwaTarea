@@ -4,11 +4,8 @@
 using namespace std;
 
 int run() {
-
     Tienda store ;
     int opcion;
-    cout << "[--- BIENVENIDOS A FARMACIA NEZMO ---]" << endl;
-
     store.logIn();
 
     do {
@@ -46,7 +43,36 @@ int run() {
     return 0;
 }
 
-int main(){
+int tests(){
+    signUp_happytest();
+    signUp_unhappytest();
+    logIn_happytest();
+    logIn_unhappytest();
+    showCredentials_test();
+    print_test();
+    addStock_happytest();
+    addStock_unhappytest();
+    add_addStock_happytest();
+    add_addStock_unhappytest();
+    add_happytest();
+    add_unhappytest();
+    comprar_happytest();
+    comprar_unhappytest();
     nocomprar_happytest();
+    nocomprar_unhappytest();
+}
+
+int main(){
+    int s = 0;
+    do {
+        cout << "[--- BIENVENIDOS A FARMACIA NEZMO ---]" << endl;
+        cout << "Seleccione una opcion:" << endl;
+        cout << "[1] Ejecutar programa\t[2] Correr tests" << endl;
+        cin >> s;
+        if(s==1)
+            run();
+        else if(s==2)
+            tests();
+    } while(s!=1 && s!=2);
     return 0;
 }

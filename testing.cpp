@@ -26,7 +26,7 @@ int signUp_happytest() {
     return 0;
 }
 
-int signUp_sadtest() {
+int signUp_unhappytest() {
     Tienda* store = new Tienda;
     store->signUp();
     string dni_a = "";
@@ -76,7 +76,7 @@ int logIn_happytest(){
     return 0;
 }
 
-int logIn_sadtest() {
+int logIn_unhappytest() {
     Tienda* store = new Tienda;
     store->logIn();
     string dni_a = "";
