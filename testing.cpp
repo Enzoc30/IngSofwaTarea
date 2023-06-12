@@ -118,8 +118,10 @@ int print_test(){
 }
 
 int addStock_happytest(){
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string stock_a = to_string(10);
     string nombre_a = "Aspirina";
+    
     Tienda* store = new Tienda;
     store->addStock();
     delete store;
@@ -146,8 +148,10 @@ int addStock_happytest(){
 }
 
 int addStock_unhappytest(){
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string stock_a = to_string(10);
     string nombre_a = "Aspirina";
+    
     Tienda* store = new Tienda;
     store->addStock();
     delete store;
@@ -174,8 +178,10 @@ int addStock_unhappytest(){
 }
 
 int add_addStock_happytest(){
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string stock_a = to_string(10);
     string nombre_a = "Aspirina";
+    
     Tienda* store = new Tienda;
     store->add();
     delete store;
@@ -202,8 +208,10 @@ int add_addStock_happytest(){
 }
 
 int add_addStock_unhappytest(){
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string stock_a = to_string(10);
     string nombre_a = "Aspirina";
+    
     Tienda* store = new Tienda;
     store->add();
     delete store;
@@ -230,9 +238,11 @@ int add_addStock_unhappytest(){
 }
 
 int add_happytest(){
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string nombre_a = "Paolocetamol";
     string precio_a = to_string(40);
     string stock_a = to_string(10);
+    
     Tienda* store = new Tienda;
     store->add();
     delete store;
@@ -259,9 +269,11 @@ int add_happytest(){
 }
 
 int add_unhappytest(){
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string nombre_a = "Paolocetamol";
     string precio_a = to_string(40);
     string stock_a = to_string(10);
+    
     Tienda* store = new Tienda;
     store->add();
     delete store;
@@ -288,8 +300,10 @@ int add_unhappytest(){
 }
 
 int comprar_happytest() {
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string nombre_a = "Aspirina";
     int stock_a = 2;
+    
     string linea, nombre, precio, stock;
     ifstream get_user("../tienda.csv", ios::in | ios::out);
     if (get_user.is_open()) {
@@ -332,8 +346,10 @@ int comprar_happytest() {
 }
 
 int comprar_unhappytest() {
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string nombre_a = "Aspirina";
     int stock_a = 2;
+    
     string linea, nombre, precio, stock;
     ifstream get_user("../tienda.csv", ios::in | ios::out);
     if (get_user.is_open()) {
@@ -376,8 +392,10 @@ int comprar_unhappytest() {
 }
 
 int nocomprar_happytest() {
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string nombre_a = "Aspirina";
     int stock_a = 0;
+    
     string linea, nombre, precio, stock;
     ifstream get_user("../tienda.csv", ios::in | ios::out);
     if (get_user.is_open()) {
@@ -420,8 +438,10 @@ int nocomprar_happytest() {
 }
 
 int nocomprar_unhappytest() {
+    // Ingresar las siguientes variables al momento de ejecutar el cin:
     string nombre_a = "Aspirina";
     int stock_a = 0;
+    
     string linea, nombre, precio, stock;
     ifstream get_user("../tienda.csv", ios::in | ios::out);
     if (get_user.is_open()) {
