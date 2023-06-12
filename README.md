@@ -9,3 +9,8 @@
   * ## Sofía García  - 202110567
 
 ![Diagrama UML](DiagramaDeClases.jpeg)
+
+# **Testing**:
+
+* ## Pruebas unitarias: testing.cpp --> Ejecutar en main.cpp
+* ## Casos de prueba manual: https://docs.google.com/spreadsheets/d/1UsQCinxbMW8iuZLum0PsGHt5ktPJP5rXj9ZrMXUrOpE/edit?usp=sharing
