@@ -27,7 +27,7 @@ private:
     vector<Product> productos;
 
 public:
-    User active_user;
+    User active_user = User("77777777", "admin", 1000000);
     Tienda() {
         ifstream archivo(filename);
         if (archivo.is_open()) {
@@ -153,7 +153,7 @@ public:
         cin >> ite->stock; cout << endl;
     }
 
-    void comprar (){
+    void comprar(){
         vector<Product>::iterator it;
         Product to_buy;
         cout << "******************** LISTA ********************" << endl;
@@ -206,7 +206,7 @@ public:
         string fecha, proveedor = "FARMACIA NEZMO";
         string numeroBoleta, tipoPago, nombrePersona;
         string numeroFactura, tipoFactura;
-        cout << "=== Menú ===" << endl;
+        cout << "=== Menu ===" << endl;
         cout << "[1] Registrar Compra" << endl;
         cout << "[2] Registrar Boleta" << endl;
         cout << "[3] Registrar Factura" << endl;
@@ -295,7 +295,7 @@ public:
 
         ofstream write_user("../users.csv", ios::in | ios::out);
         if (!new_user){
-            write_user.seekp(pos, ios::beg);
+            write_user.seekp(pos-1, ios::beg);
         }
         else{
             write_user.seekp(0, ios::end);

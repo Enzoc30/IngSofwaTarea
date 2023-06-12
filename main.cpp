@@ -47,6 +47,6 @@ int run() {
 }
 
 int main(){
-    signUp_sadtest();
+    nocomprar_happytest();
     return 0;
 }
